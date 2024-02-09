@@ -4,9 +4,9 @@ namespace EmployeeProject.Services;
 
 public interface IEmployeeService
 {
-    Task<int> CreateEmployee(Employee employee);
-    Task<List<Employee>> GetEmployee(int companyid);
-    Task<List<Employee>> GetEmployeeList(int departamentId);
-    Task<Employee> UpdateEmployee(Employee employee);
-    Task DeleteEmployee(int key);
+    Task<int> CreateEmployeeAndReference(Employee employee);
+    Task<List<Employee>> GetEmployeeByCompanyList(int companyid);
+    Task<List<Employee>> GetEmployeeByDepartamentList(int departamentId);
+    Task<Employee> UpdateEmployeeAndReference(Employee employee);
+    Task DeleteEmployeeAndReference(int key);
 }

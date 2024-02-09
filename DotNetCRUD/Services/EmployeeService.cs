@@ -11,7 +11,7 @@ public class EmployeeService : IEmployeeService
         _dbService = dbService;
     }
 
-    public async Task<int> CreateEmployee(Employee employee)
+    public async Task<int> CreateEmployeeAndReference(Employee employee)
     {
         var saveEmployee =
             await _dbService.EditData(
@@ -19,30 +19,30 @@ public class EmployeeService : IEmployeeService
                 employee);
 
         var savePassport = _dbService.EditData(
-                  "INSERT INTO public.passport (id,number, type) VALUES (@Id, @Number, @Type)",
+                  "INSERT INTO public.passport (number, type) VALUES (@Number, @Type)",
                   employee.Passport);
 
         var saveDepartament = _dbService.EditData(
-                  "INSERT INTO public.department (id,name, phone) VALUES (@Id, @Name, @Phone)",
+                  "INSERT INTO public.department (name, phone) VALUES (@Name, @Phone)",
                   employee.Department);
 
         return employee.Id;
     }
 
-    public async Task<List<Employee>> GetEmployeeList(int departamentId)
+    public async Task<List<Employee>> GetEmployeeByDepartamentList(int departamentId)
     {
         var employeeList = await _dbService.GetAsync<Employee>("SELECT * FROM public.employee where departamentId=@DepartamentId", new { });
         return employeeList;
     }
 
 
-    public async Task<List<Employee>> GetEmployee(int companyId)
+    public async Task<List<Employee>> GetEmployeeByCompanyList(int companyId)
     {
         var employeeList = await _dbService.GetAsync<Employee>("SELECT * FROM public.employee where companyId=@CompanyId", new { });
         return employeeList;
     }
 
-    public async Task<Employee> UpdateEmployee(Employee employee)
+    public async Task<Employee> UpdateEmployeeAndReference(Employee employee)
     {
         var updateEmployee =
             await _dbService.EditData(
@@ -60,7 +60,7 @@ public class EmployeeService : IEmployeeService
         return employee;
     }
 
-    public async Task DeleteEmployee(int id)
+    public async Task DeleteEmployeeAndReference(int id)
     {
         await _dbService.EditData("DELETE FROM public.employee WHERE id=@Id", new {id});
     }

@@ -17,7 +17,7 @@ public class DbService : IDbService
     {
         List<T> result = new List<T>();
 
-        result = (await _db.QueryAsync<T>(command, parms).ConfigureAwait(false)).ToList();
+        result = (await _db.QueryAsync<T>(command, parms)).ToList();
 
         return result;
 

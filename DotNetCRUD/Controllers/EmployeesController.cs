@@ -14,41 +14,43 @@ public class EmployeesController : Controller
     {
         _employeeService = employeeService;
     }
-    
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetEmployee(int id)
-    {
-        var result =  await _employeeService.GetEmployee(id);
 
-        return Ok(result);
+    [HttpGet("{id:int}")]
+    public async Task<List<Employee>> GetEmployeeByDepartamentList(int id)
+    {
+        var result = await _employeeService.GetEmployeeByDepartamentList(id);
+
+        return result;
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<List<Employee>> GetEmployeeByCompanyList(int id)
+    {
+        var result =  await _employeeService.GetEmployeeByCompanyList(id);
+
+        return result;
     }
     
     [HttpPost]
-    public async Task<IActionResult> AddEmployee([FromBody]Employee employee)
+    public async Task<int> AddEmployee([FromBody]Employee employee)
     {
-        if (employee == null) Results.BadRequest();
+        var result = await _employeeService.CreateEmployeeAndReference(employee);
 
-        var result = await _employeeService.CreateEmployee(employee);
-
-        return Ok(result);
+        return result;
         
     }
     
     [HttpPut]
-    public async Task<IActionResult> UpdateEmployee([FromBody]Employee employee)
+    public async Task<Employee> UpdateEmployee([FromBody]Employee employee)
     {
-        if (employee == null) Results.BadRequest();
+        var result =  await _employeeService.UpdateEmployeeAndReference(employee);
 
-        var result =  await _employeeService.UpdateEmployee(employee);
-
-        return Ok(result);
+        return result;
     }
     
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteEmployee(int id)
+    public async Task DeleteEmployee(int id)
     {
-        await _employeeService.DeleteEmployee(id);
-
-        return Ok();
+        await _employeeService.DeleteEmployeeAndReference(id);
     }
 }
