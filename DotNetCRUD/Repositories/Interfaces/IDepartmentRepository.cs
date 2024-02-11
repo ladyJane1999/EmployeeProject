@@ -2,7 +2,7 @@
 
 namespace EmployeeProject.Interfaces.Repositories
 {
-    public interface IDepartamentRepository
+    public interface IDepartmentRepository
     {
         public Task<int> CreateDepartament(Department departament);
         public Task<Department> UpdateDepartament(Department departament);

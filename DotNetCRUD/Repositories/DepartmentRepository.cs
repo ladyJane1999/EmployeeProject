@@ -4,11 +4,11 @@ using EmployeeProject.Models;
 
 namespace EmployeeProject.Repositories
 {
-    public class DepartamentRepository : IDepartamentRepository
+    public class DepartmentRepository : IDepartmentRepository
     {
         private readonly IDbContext _dbContext;
 
-        public DepartamentRepository(IDbContext dbService)
+        public DepartmentRepository(IDbContext dbService)
         {
             _dbContext = dbService;
         }
@@ -18,7 +18,7 @@ namespace EmployeeProject.Repositories
             if (departament == null) throw new ArgumentNullException(nameof(departament));
 
             await _dbContext.EditData(
-                      "INSERT INTO public.department (id, name, phone) VALUES (@Id,@Name, @Phone)",
+                      "INSERT INTO public.department (name, phone) VALUES (@Name, @Phone)",
                       departament);
 
             return departament.Id;

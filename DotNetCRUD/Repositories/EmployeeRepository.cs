@@ -18,11 +18,11 @@ public class EmployeeRepository : IEmployeeRepository
         if (employee == null) throw new ArgumentNullException(nameof(employee));
 
         await _dbContext.EditData(
-                "INSERT INTO public.employee (id, name, surname, phone, companyId) VALUES (@Id, @Name, @Surname, @Phone, @CompanyId)",
+                "INSERT INTO public.employee (name, surname, phone, companyId) VALUES (@Id, @Name, @Surname, @Phone, @CompanyId)",
                 employee);
 
         await _dbContext.EditData(
-                "INSERT INTO public.passport (id, number, type) VALUES (@Id,@Number, @Type)",
+                "INSERT INTO public.passport (number, type) VALUES (@Id,@Number, @Type)",
                 employee.Passport);
 
         return employee.Id;
