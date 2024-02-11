@@ -1,5 +1,5 @@
 ﻿using EmployeeProject.Models;
-using EmployeeProject.Services;
+using EmployeeProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeProject.Controllers;
@@ -8,25 +8,25 @@ namespace EmployeeProject.Controllers;
 [Route("[controller]")]
 public class EmployeesController : Controller
 {
-    private readonly IEmployeeService _employeeService;
+    private readonly IEmployeeRepository _employeeService;
 
-    public EmployeesController(IEmployeeService employeeService)
+    public EmployeesController(IEmployeeRepository employeeService)
     {
         _employeeService = employeeService;
     }
 
-    [HttpGet("{departamentId:int}")]
-    public async Task<List<Employee>> GetEmployeeByDepartamentList(int departamentId)
+    [HttpGet("[action]/{departamentId:int}")]
+    public async Task<List<Employee>> GetEmployeesDepartament(int departamentId)
     {
-        var result = await _employeeService.GetEmployeeByDepartamentList(departamentId);
+        var result = await _employeeService.GetEmployeesDepartament(departamentId);
 
         return result;
     }
 
     [HttpGet("{companyId:int}")]
-    public async Task<List<Employee>> GetEmployeeByCompanyList(int companyId)
+    public async Task<List<Employee>> GetEmployeesCompany(int companyId)
     {
-        var result =  await _employeeService.GetEmployeeByCompanyList(companyId);
+        var result =  await _employeeService.GetEmployeesCompany(companyId);
 
         return result;
     }
@@ -34,7 +34,7 @@ public class EmployeesController : Controller
     [HttpPost]
     public async Task<int> AddEmployee([FromBody]Employee employee)
     {
-        var result = await _employeeService.CreateEmployeeAndReference(employee);
+        var result = await _employeeService.CreateEmployee(employee);
 
         return result;
         
@@ -43,7 +43,7 @@ public class EmployeesController : Controller
     [HttpPut]
     public async Task<Employee> UpdateEmployee([FromBody]Employee employee)
     {
-        var result =  await _employeeService.UpdateEmployeeAndReference(employee);
+        var result =  await _employeeService.UpdateEmployee(employee);
 
         return result;
     }
@@ -51,6 +51,6 @@ public class EmployeesController : Controller
     [HttpDelete("{employeeId:int}")]
     public async Task DeleteEmployee(int employeeId)
     {
-        await _employeeService.DeleteEmployeeAndReference(employeeId);
+        await _employeeService.DeleteEmployee(employeeId);
     }
 }
