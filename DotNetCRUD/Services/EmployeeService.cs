@@ -13,6 +13,8 @@ public class EmployeeService : IEmployeeService
 
     public async Task<int> CreateEmployeeAndReference(Employee employee)
     {
+        if (employee == null) throw new ArgumentNullException(nameof(employee));
+
         var saveEmployee =
             await _dbService.EditData(
                 "INSERT INTO public.employee (id,name, surname, phone, companyId, passportId) VALUES (@Id, @Name, @Surname, @Phone, @CompanyId, @PassportId, @DepartamentId)",
@@ -44,6 +46,8 @@ public class EmployeeService : IEmployeeService
 
     public async Task<Employee> UpdateEmployeeAndReference(Employee employee)
     {
+        if (employee == null) throw new ArgumentNullException(nameof(employee));
+
         var updateEmployee =
             await _dbService.EditData(
                 "Update public.employee SET name=@Name, surname=@Surname, phone=@Phone, companyId=@CompanyId WHERE id=@Id",

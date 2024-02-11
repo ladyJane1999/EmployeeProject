@@ -15,18 +15,18 @@ public class EmployeesController : Controller
         _employeeService = employeeService;
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<List<Employee>> GetEmployeeByDepartamentList(int id)
+    [HttpGet("{departamentId:int}")]
+    public async Task<List<Employee>> GetEmployeeByDepartamentList(int departamentId)
     {
-        var result = await _employeeService.GetEmployeeByDepartamentList(id);
+        var result = await _employeeService.GetEmployeeByDepartamentList(departamentId);
 
         return result;
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<List<Employee>> GetEmployeeByCompanyList(int id)
+    [HttpGet("{companyId:int}")]
+    public async Task<List<Employee>> GetEmployeeByCompanyList(int companyId)
     {
-        var result =  await _employeeService.GetEmployeeByCompanyList(id);
+        var result =  await _employeeService.GetEmployeeByCompanyList(companyId);
 
         return result;
     }
@@ -48,9 +48,9 @@ public class EmployeesController : Controller
         return result;
     }
     
-    [HttpDelete("{id:int}")]
-    public async Task DeleteEmployee(int id)
+    [HttpDelete("{employeeId:int}")]
+    public async Task DeleteEmployee(int employeeId)
     {
-        await _employeeService.DeleteEmployeeAndReference(id);
+        await _employeeService.DeleteEmployeeAndReference(employeeId);
     }
 }
