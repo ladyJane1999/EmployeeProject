@@ -1,4 +1,5 @@
 ﻿using EmployeeProject.DbContext;
+using EmployeeProject.Interfaces.Repositories;
 using EmployeeProject.Models;
 
 namespace EmployeeProject.Repositories

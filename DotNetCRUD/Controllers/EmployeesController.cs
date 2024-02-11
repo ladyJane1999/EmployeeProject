@@ -1,4 +1,5 @@
-﻿using EmployeeProject.Models;
+﻿using EmployeeProject.Interfaces.Repositories;
+using EmployeeProject.Models;
 using EmployeeProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,17 +17,17 @@ public class EmployeesController : Controller
     }
 
     [HttpGet("[action]/{departamentId:int}")]
-    public async Task<List<Employee>> GetEmployeesDepartament(int departamentId)
+    public async Task<List<Employee>> GetEmployeesByDepartament(int departamentId)
     {
-        var result = await _employeeService.GetEmployeesDepartament(departamentId);
+        var result = await _employeeService.GetEmployeesByDepartament(departamentId);
 
         return result;
     }
 
     [HttpGet("{companyId:int}")]
-    public async Task<List<Employee>> GetEmployeesCompany(int companyId)
+    public async Task<List<Employee>> GetEmployeesByCompany(int companyId)
     {
-        var result =  await _employeeService.GetEmployeesCompany(companyId);
+        var result =  await _employeeService.GetEmployeesByCompany(companyId);
 
         return result;
     }

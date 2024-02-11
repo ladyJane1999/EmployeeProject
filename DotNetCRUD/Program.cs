@@ -1,4 +1,5 @@
 using EmployeeProject.DbContext;
+using EmployeeProject.Interfaces.Repositories;
 using EmployeeProject.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,5 @@
 ﻿using EmployeeProject.DbContext;
+using EmployeeProject.Interfaces.Repositories;
 using EmployeeProject.Models;
 
 namespace EmployeeProject.Repositories;
@@ -27,14 +28,14 @@ public class EmployeeRepository : IEmployeeRepository
         return employee.Id;
     }
 
-    public async Task<List<Employee>> GetEmployeesDepartament(int departamentId)
+    public async Task<List<Employee>> GetEmployeesByDepartament(int departamentId)
     {
         var employeeList = await _dbContext.GetAsync<Employee>("SELECT * FROM public.employee where id=@departamentId", new { departamentId });
         return employeeList;
     }
 
 
-    public async Task<List<Employee>> GetEmployeesCompany(int companyId)
+    public async Task<List<Employee>> GetEmployeesByCompany(int companyId)
     {
         var employeeList = await _dbContext.GetAsync<Employee>("SELECT * FROM public.employee where id=@companyId", new { companyId });
         return employeeList;

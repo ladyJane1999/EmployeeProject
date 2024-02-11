@@ -1,6 +1,6 @@
 ﻿using EmployeeProject.Models;
 
-namespace EmployeeProject.Repositories
+namespace EmployeeProject.Interfaces.Repositories
 {
     public interface IDepartamentRepository
     {
